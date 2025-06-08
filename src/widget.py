@@ -1,6 +1,9 @@
 from src.masks import get_mask_account, get_mask_card_number
+from datetime import datetime
+
 
 def mask_account_card(str_number_card_or_account: str, number_account: list, number_card: list) -> str:
+    """ Функция принимает тип и номер карты или счета и возвращает строку с замаскированным номером"""
     if "Счет" in str_number_card_or_account or "счет" in str_number_card_or_account:
         number_account = list(str_number_card_or_account[-20:])
         get_mask_account(number_account)
@@ -16,9 +19,8 @@ def mask_account_card(str_number_card_or_account: str, number_account: list, num
     return text
 
 
-from datetime import datetime
-
 def get_date(date_inp: str) -> str:
+    """Функция, которая принимает на вход строку и возвращает строку с датой."""
     date = datetime.strptime(date_inp[:10], '%Y-%m-%d')
     return f"{date.day:02}.{date.month:02}.{date.year}"
 

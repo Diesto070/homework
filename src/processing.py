@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Dict, List
 
 operation_list = [
     {'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'},
@@ -8,11 +8,13 @@ operation_list = [
 ]
 
 
-def filter_by_state(operation_list: List[Dict[str, Any]], state: str = 'EXECUTED') -> list[Dict[str, Any]]:
-    """"Функция сортировки по ключу state"""
+def filter_by_state(operation_list: List[Dict[str, str]], state: str = 'EXECUTED') -> list[Dict[str, str]]:
+    """"Функция принимает список словарей и опционально значение для ключа state(по умолчанию 'EXECUTED').
+        Функция возвращает новый список словарей, содержащий только те словари, у которых ключ state
+        соответствует указанному значению."""
     return list((item for item in operation_list if item.get('state') == state))
 
 
-def sort_by_date(operation_list: List[Dict[str, Any]]) -> list[Dict[str, Any]]:
+def sort_by_date(operation_list: List[Dict[str, str]]) -> list[Dict[str, str]]:
     """Функция сортировки даты"""
     return sorted(operation_list, key=lambda item: item['date'], reverse=True)

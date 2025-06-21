@@ -12,6 +12,7 @@ from src.masks import get_mask_account, get_mask_card_number
                              ("11111111111111111", "Неверный формат входных данных"),
                              ("3333", "Неверный формат входных данных"),
                              ("", "Неверный формат входных данных"),
+                             ("Invalid_data", "Неверный формат входных данных")
                          ])
 def test_get_mask_card_number(card_number: Union[str, None], expected: str) -> None:
     assert get_mask_card_number(card_number) == expected
@@ -24,6 +25,7 @@ def test_get_mask_card_number(card_number: Union[str, None], expected: str) -> N
                              ("111111111111111111111", "Неверный формат входных данных"),
                              ("1234", "Неверный формат входных данных"),
                              ("", "Неверный формат входных данных"),
+                             ("Invalid_data", "Неверный формат входных данных")
                          ])
 def test_get_mask_account(account_number: Union[str, None], expected: str) -> None:
     assert get_mask_account(account_number) == expected

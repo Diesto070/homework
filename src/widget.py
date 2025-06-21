@@ -21,5 +21,8 @@ def mask_account_card(str_number_card_or_account: str) -> str:
 
 def get_date(date_inp: str) -> str:
     """Функция, которая принимает на вход строку и возвращает строку с датой."""
+    if not date_inp or len(date_inp) > 26 or '-' not in date_inp:
+        return "Неверный формат входных данных"
+
     date = datetime.strptime(date_inp[:10], '%Y-%m-%d')
     return f"{date.day:02}.{date.month:02}.{date.year}"

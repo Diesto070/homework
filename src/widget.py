@@ -23,6 +23,3 @@ def get_date(date_inp: str) -> str:
     """Функция, которая принимает на вход строку и возвращает строку с датой."""
     date = datetime.strptime(date_inp[:10], '%Y-%m-%d')
     return f"{date.day:02}.{date.month:02}.{date.year}"
-
-
-print(get_date("2024-03-11T02:26:18.671407"))

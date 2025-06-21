@@ -15,17 +15,8 @@ def get_mask_card_number(number_card: List[str]) -> str:
     return mask_card_number
 
 
-card_number_str = "7000792289606361"
-card_number_list = list(card_number_str)
-mask = get_mask_card_number(card_number_list)
-print(mask)
-
-
 def get_mask_account(number_cart: str) -> str:
     """Функция принимает на вход номер счета и возвращает его маску, в формате **XXXX"""
     number_cart = number_cart.replace(" ", "")
     number_mask = str(number_cart[-4:])
     return f"**{number_mask}"
-
-
-print(get_mask_account("73654108430135874305"))

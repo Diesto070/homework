@@ -8,6 +8,11 @@ def get_mask_card_number(number_card: List[str]) -> str:
     mask_card = " ".join(number_card_1[i : i + 4] for i in range(0, len(number_card), 4))
     mask_card_list = list(mask_card)
 
+    if len(number_card) < 16:
+        return "Неверный формат входных данных"
+    elif len(number_card) >= 17:
+        return "Неверный формат входных данных"
+
     for i in range(len(mask_card_list)):
         if 7 <= i <= 13 and mask_card_list[i] != " ":
             mask_card_list[i] = "*"
@@ -17,6 +22,11 @@ def get_mask_card_number(number_card: List[str]) -> str:
 
 def get_mask_account(number_cart: str) -> str:
     """Функция принимает на вход номер счета и возвращает его маску, в формате **XXXX"""
+    if len(number_cart) < 20:
+        return "Неверный формат входных данных"
+    elif len(number_cart) >= 21:
+        return "Неверный формат входных данных"
+
     number_cart = number_cart.replace(" ", "")
     number_mask = str(number_cart[-4:])
     return f"**{number_mask}"

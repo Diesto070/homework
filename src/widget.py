@@ -2,19 +2,19 @@ from src.masks import get_mask_account, get_mask_card_number
 from datetime import datetime
 
 
-def mask_account_card(str_number_card_or_account: str, number_account: list, number_card: list) -> str:
+def mask_account_card(str_number_card_or_account: str) -> str:
     """ Функция принимает тип и номер карты или счета и возвращает строку с замаскированным номером"""
     if "Счет" in str_number_card_or_account or "счет" in str_number_card_or_account:
-        number_account = list(str_number_card_or_account[-20:])
+        number_account = (str_number_card_or_account[-20:])
         get_mask_account(number_account)
         number_account_mask = get_mask_account(number_account)
-        text = str(f"{list(str_number_card_or_account[:-21])} {number_account_mask}")
+        text = str(f"{(str_number_card_or_account[:-21])} {number_account_mask}")
 
     else:
-        number_card = list(str_number_card_or_account[-16:])
+        number_card = (str_number_card_or_account[-16:])
         get_mask_card_number(number_card)
         number_card_mask = get_mask_card_number(number_card)
-        text = str(f"{list(str_number_card_or_account[:-17])} {number_card_mask}")
+        text = str(f"{(str_number_card_or_account[:-17])} {number_card_mask}")
 
     return text
 

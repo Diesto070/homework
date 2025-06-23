@@ -1,4 +1,5 @@
 import pytest
+
 from src.widget import get_date, mask_account_card
 
 
@@ -16,7 +17,7 @@ def test_mask_account_card(number_card_or_account: str, expected: str) -> None:
 
 
 @pytest.fixture
-def correct_date() ->str:
+def correct_date():
     return "11.03.2024"
 
 

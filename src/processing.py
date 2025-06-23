@@ -1,6 +1,6 @@
 from typing import Dict, List
 
-operation_list = [
+dict_list = [
     {'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'},
     {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572'},
     {'id': 594226727, 'state': 'CANCELED', 'date': '2018-09-12T21:27:25.241689'},
@@ -8,13 +8,13 @@ operation_list = [
 ]
 
 
-def filter_by_state(operation_list: List[Dict[str, str]], state: str = 'EXECUTED') -> list[Dict[str, str]]:
+def filter_by_state(dict_list: List[Dict[str, str]], state: str = 'EXECUTED') -> list[Dict[str, str]]:
     """"Функция принимает список словарей и опционально значение для ключа state(по умолчанию 'EXECUTED').
         Функция возвращает новый список словарей, содержащий только те словари, у которых ключ state
         соответствует указанному значению."""
-    return list((item for item in operation_list if item.get('state') == state))
+    return list((item for item in dict_list if item.get('state') == state))
 
 
-def sort_by_date(operation_list: List[Dict[str, str]]) -> list[Dict[str, str]]:
+def sort_by_date(dict_list: List[Dict[str, str]]) -> list[Dict[str, str]]:
     """Функция сортировки даты"""
-    return sorted(operation_list, key=lambda item: item['date'], reverse=True)
+    return sorted(dict_list, key=lambda item: item['date'], reverse=True)

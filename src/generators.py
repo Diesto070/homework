@@ -1,7 +1,7 @@
-from typing import Iterable, Iterator
+from typing import Iterator
 
 
-def filter_by_currency(transactions: list, currency: str) -> Iterable:
+def filter_by_currency(transactions: list, currency: str) -> Iterator[str]:
     """ Функция принимает на вход список словарей, представляющих транзакции и возвращает итератор, который поочередно
     выдает транзакции, где валюта операции соответствует заданной (например, USD)."""
 
@@ -89,9 +89,10 @@ transactions = [
 ]
 
 usd_transactions = filter_by_currency(transactions, "USD")
+print(next(usd_transactions))
 
 
-def transaction_descriptions(transactions: list) -> Iterable:
+def transaction_descriptions(transactions: list) -> Iterator[str]:
     """ Принимает список словарей с транзакциями и возвращает
     описание каждой операции по очереди."""
     for i in transactions:

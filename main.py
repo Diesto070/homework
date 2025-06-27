@@ -1,3 +1,4 @@
+from generators import usd_transactions, descriptions, filter_by_currency
 from src.masks import get_mask_card_number, get_mask_account
 from src.processing import sort_by_date, filter_by_state
 from src.widget import get_date, mask_account_card

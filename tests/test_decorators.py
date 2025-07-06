@@ -26,4 +26,4 @@ def test_log_with_filename():
     my_function(10, 10)
     with open("mylog_test.txt", "r", encoding='utf-8') as file:
         content = file.read()
-        assert content.strip() == "Функция my_function успешно завершена. Результат: 20"
+        assert content.strip() == 'Функция my_function успешно завершена. Результат: 20'

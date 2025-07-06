@@ -30,3 +30,11 @@ pyproject.toml
 tests
 ```
 Модули тестируются в отдельных тестовых файлах.
+## Реализованы модули:
+```
+generators.py
+decorators.py
+masks.py
+processing.py
+widget.py
+```

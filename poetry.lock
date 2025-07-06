@@ -330,3 +330,4 @@ files = [
 lock-version = "2.1"
 python-versions = ">=3.13"
 content-hash = "1b8ada0422ed3db386304a281a24224d9997b839ddf7c29635826640a65d2076"
+content-hash = "7c505bcd3a9de48319128f7336c21f5f55ed5ef9842f9971d04667c4e67c90bd"

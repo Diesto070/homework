@@ -31,4 +31,4 @@ def my_function(x: int, y: int) ->int:
     return x + y
 
 
-my_function(1, 2)
+my_function(2, 3)

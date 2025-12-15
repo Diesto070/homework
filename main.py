@@ -21,3 +21,19 @@ if __name__ == '__main__':
     {'id': 594226727, 'state': 'CANCELED', 'date': '2018-09-12T21:27:25.241689'},
     {'id': 615064591, 'state': 'CANCELED', 'date': '2018-10-14T08:21:33.419441'}
         ]))
+
+
+from src.utils import get_transaction_amount, load_financial_transactions
+
+
+def main() -> None:
+    json_path = "data/operations.json"
+
+    rez = load_financial_transactions(json_path)
+
+    for i in rez:
+        print(get_transaction_amount(i))
+
+
+if __name__ == "__main__":
+    main()

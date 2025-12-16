@@ -1,28 +1,49 @@
-from src.masks import get_mask_account, get_mask_card_number
-from datetime import datetime
+from .masks import get_mask_account, get_mask_card_number
 
 
-def mask_account_card(str_number_card_or_account: str) -> str:
-    """ Функция принимает тип и номер карты или счета и возвращает строку с замаскированным номером"""
-    if "Счет" in str_number_card_or_account or "счет" in str_number_card_or_account:
-        number_account = (str_number_card_or_account[-20:])
-        get_mask_account(number_account)
-        number_account_mask = get_mask_account(number_account)
-        text = str(f"{(str_number_card_or_account[:-21])} {number_account_mask}")
+def mask_account_card(account_card: str) -> str:
+    """
+    Функция обработки информации о карте и о счете.
+    принимает один аргумент — строку, содержащую тип и номер карты или счета. \
+    И возвращает строку с замаскированным номером.
+    """
+    choice_acc = account_card.strip().split()
+    result = "Данные отсутствуют"
+    if len(choice_acc) < 2:
+        return result
 
-    else:
-        number_card = (str_number_card_or_account[-16:])
-        get_mask_card_number(number_card)
-        number_card_mask = get_mask_card_number(number_card)
-        text = str(f"{(str_number_card_or_account[:-17])} {number_card_mask}")
+    number_str = choice_acc[-1]
+    try:
+        number = int(number_str)
+    except (ValueError, TypeError):
+        return result
 
-    return text
+    if choice_acc[0] == "Счет":
+        result = f"Счет {get_mask_account(number)}"
+        return result
+
+    card_name = " ".join(choice_acc[:-1])
+    if card_name in [
+        "Visa",
+        "Maestro",
+        "MasterCard",
+        "Visa Classic",
+        "Visa Platinum",
+        "Visa Gold",
+    ]:
+        result = f"{card_name} {get_mask_card_number(number)}"
+        return result
+    return result
 
 
-def get_date(date_inp: str) -> str:
-    """Функция, которая принимает на вход строку и возвращает строку с датой."""
-    if not date_inp or len(date_inp) > 26 or '-' not in date_inp:
-        return "Неверный формат входных данных"
-
-    date = datetime.strptime(date_inp[:10], '%Y-%m-%d')
-    return f"{date.day:02}.{date.month:02}.{date.year}"
+def get_date(date: str) -> str:
+    """
+    Функция возвращает дату из строки определенного формата.
+    Принимает на вход строку с датой в формате "2024-03-11T02:26:18.671407"
+    и возвращает строку с датой в формате "ДД.ММ.ГГГГ" ("11.03.2024").
+    """
+    result = "Некорректная дата"
+    if len(date) >= 10 and "-" in date and date.count("-") == 2:
+        year, month, day = date.split("-")
+        result = f"{day[:2]}.{month}.{year}"
+    return result

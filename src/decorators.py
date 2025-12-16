@@ -1,34 +1,44 @@
-from typing import Any
+from functools import wraps
+from time import time
+from typing import Any, Callable
 
 
-def log(filename: Any=None) ->Any:
-    """Декоратор, который будет автоматически логировать начало и конец выполнения функции,
-       а также ее результаты или возникшие ошибки."""
-    def my_decor(func: Any) ->Any:
-        def inner(*args: Any, **kwargs: Any) ->Any:
+def log(filename: str | None) -> Callable[..., Any]:
+    """
+    Функция, которая возвращает декоратор,
+    неоходим для логирования выполнения функции
+    Если filename указан - логи выводим в файл,
+    иначе - выводятся в консоль
+    """
+
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
+        @wraps(func)
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
+            message = ""
             try:
+                start_func = time()
                 result = func(*args, **kwargs)
-                success_message = f"Функция {func.__name__} успешно завершена. Результат: {result}"
-                if filename:
-                    with open(filename, "a", encoding="utf-8") as f:
-                        f.write(success_message + "\n")
-                else:
-                    print(success_message)
-                return result
+                end_func = time()
+                message = (
+                    f"Функция {func.__name__} выполнилась. \n"
+                    f"Время работы функции:\n"
+                    f"старт: {start_func}\n"
+                    f"окончание: {end_func}\n"
+                    f"Время работы: {end_func - start_func:.3f}\n"
+                    f"Результат: {result}\n\n"
+                )
             except Exception as e:
-                error_message = f"Ошибка в {func.__name__}: {type(e).__name__}, args: {args}, kwargs: {kwargs}"
+                message = f"Функция {func.__name__} error: {e}. Входные данные args: {args}, kwargs: {kwargs}\n\n"
+                raise
+
+            finally:
                 if filename:
-                    with open(filename, "a", encoding="utf-8") as text:
-                        text.write(error_message + "\n")
+                    with open(filename, "a", encoding="utf8") as file:
+                        file.write(message)
                 else:
-                    print(error_message)
-        return inner
-    return my_decor
+                    print(message)
+            return result
 
+        return wrapper
 
-@log()
-def my_function(x: int, y: int) ->int:
-    return x + y
-
-
-my_function(2, 3)
+    return decorator

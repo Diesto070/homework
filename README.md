@@ -152,6 +152,18 @@ for card_number in card_number_generator(1, 5):
     0000 0000 0000 0004
     0000 0000 0000 0005
 ```
++ Работа с CSV и Excel
+```
+from src.csv_excel import get_convert_csv_to_list_dict, get_convert_excel_to_list_dict
+
+# Чтение CSV
+csv_data = get_convert_csv_to_list_dict("data/transactions.csv")
+print(csv_data[0])  # Первый словарь
+
+# Чтение Excel
+excel_data = get_convert_excel_to_list_dict("data/transactions.xlsx")
+print(len(excel_data))  # Количество транзакций
+```
 
 + Декоратор `log`, который автоматически логирует начало и конец выполнения функции, а также ее результаты или возникшие ошибки.
 Декоратор принимает необязательный аргумент `filename`, который определяет, куда будут записываться логи (в файл или в консоль):

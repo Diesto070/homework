@@ -1,8 +1,11 @@
-def log(filename=None):
+from typing import Any
+
+
+def log(filename: Any=None) ->Any:
     """Декоратор, который будет автоматически логировать начало и конец выполнения функции,
        а также ее результаты или возникшие ошибки."""
-    def my_decor(func):
-        def inner(*args, **kwargs):
+    def my_decor(func: Any) ->Any:
+        def inner(*args: Any, **kwargs: Any) ->Any:
             try:
                 result = func(*args, **kwargs)
                 success_message = f"Функция {func.__name__} успешно завершена. Результат: {result}"
@@ -24,8 +27,8 @@ def log(filename=None):
 
 
 @log()
-def my_function(x, y):
+def my_function(x: int, y: int) ->int:
     return x + y
 
 
-my_function(1, 2)
+my_function(2, 3)

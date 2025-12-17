@@ -5,7 +5,7 @@ from collections import Counter
 def process_bank_search(data: list[dict], search: str) -> list[dict]:
     """
     Функция принимает список словарей с данными о банковских операциях и строку поиска.
-    Возвращает список словарей у которых в описании есть данная строка
+    Возвращает список словарей, у которых в описании есть данная строка
     """
     if not search:
         return data.copy()
@@ -25,7 +25,7 @@ def process_bank_search(data: list[dict], search: str) -> list[dict]:
 def process_bank_operations(data: list[dict], categories: list) -> dict:
     """
     Функция принимает список словарей с данными о банковских операциях и список категорий операций.
-    Возвращает словарь у которыго ключи - категории,
+    Возвращает словарь, у которыго ключи - категории,
     а значение - количество операций в каждой категории.
     """
     if not categories:

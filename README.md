@@ -152,7 +152,40 @@ for card_number in card_number_generator(1, 5):
     0000 0000 0000 0004
     0000 0000 0000 0005
 ```
++ Работа с CSV и Excel
+```
+from src.csv_excel import get_convert_csv_to_list_dict, get_convert_excel_to_list_dict
 
+# Чтение CSV
+csv_data = get_convert_csv_to_list_dict("data/transactions.csv")
+print(csv_data[0])  # Первый словарь
+
+# Чтение Excel
+excel_data = get_convert_excel_to_list_dict("data/transactions.xlsx")
+print(len(excel_data))  # Количество транзакций
+```
++ Новые функции в модуле `bank_operations.py`:
+Выполняет поиск по описанию транзакций. Возвращает список транзакций, в поле `description` которых содержится строка `search` (регистронезависимо).
+Пример:
+```
+data = [
+    {"description": "Покупка в магазине"},
+    {"description": "Перевод другу"}
+]
+result = process_bank_search(data, "покупка")  # найдёт первую запись
+```
++ + process_bank_operations(data: list[dict], categories: list) -> dict
+Подсчитывает количество транзакций по заданным категориям. Возвращает словарь, где ключи — категории из списка `categories`, а значения — количество операций с таким `description`. Категории, не встречающиеся в данных, включаются со значением `0`.
+Пример:
+```
+data = [
+    {"description": "Перевод"},
+    {"description": "Покупка"},
+    {"description": "Перевод"}
+]
+result = process_bank_operations(data, ["Перевод", "Покупка", "Аренда"])
+# {'Перевод': 2, 'Покупка': 1, 'Аренда': 0}
+```
 + Декоратор `log`, который автоматически логирует начало и конец выполнения функции, а также ее результаты или возникшие ошибки.
 Декоратор принимает необязательный аргумент `filename`, который определяет, куда будут записываться логи (в файл или в консоль):
 + + Если `filename` задан, логи записываются в указанный файл.
@@ -194,27 +227,31 @@ poetry run pytest --cov=src --cov-report html
 ```
 текущее покрытие кода:
 ```
-Name                         Stmts   Miss  Cover
-------------------------------------------------
-src\__init__.py                  0      0   100%
-src\decorators.py               23      0   100%
-src\external_api.py             23      0   100%
-src\generators.py               15      0   100%
-src\masks.py                    15      0   100%
-src\processing.py                6      0   100%
-src\utils.py                    33      0   100%
-src\widget.py                   25      0   100%
-tests\__init__.py                0      0   100%
-tests\conftest.py               19      0   100%
-tests\test_decorators.py        41      0   100%
-tests\test_external_api.py      35      0   100%
-tests\test_generators.py        19      0   100%
-tests\test_masks.py             17      0   100%
-tests\test_processing.py         8      0   100%
-tests\test_utils.py             64      0   100%
-tests\test_widget.py            23      0   100%
-------------------------------------------------
-TOTAL                          366      0   100%
+Name                            Stmts   Miss  Cover
+---------------------------------------------------
+src\__init__.py                     0      0   100%
+src\bank_operations.py             21      0   100%
+src\csv_excel.py                   20      0   100%
+src\decorators.py                  23      0   100%
+src\external_api.py                23      0   100%
+src\generators.py                  15      0   100%
+src\masks.py                       38      3    92%
+src\processing.py                   6      0   100%
+src\utils.py                       59      5    92%
+src\widget.py                      25      0   100%
+tests\__init__.py                   0      0   100%
+tests\conftest.py                  22      0   100%
+tests\test_bank_operations.py      46      0   100%
+tests\test_csv_excel.py            29      0   100%
+tests\test_decorators.py           41      0   100%
+tests\test_external_api.py         35      0   100%
+tests\test_generators.py           19      0   100%
+tests\test_masks.py                17      0   100%
+tests\test_processing.py            8      0   100%
+tests\test_utils.py                58      0   100%
+tests\test_widget.py               23      0   100%
+---------------------------------------------------
+TOTAL                             528      8    98%
 ```
 #### Для просмотра HTML-отчета введите в консоли:
 ```
